@@ -78,6 +78,8 @@ dependencies {
 
     // Text features
     implementation (libs.play.services.mlkit.text.recognition)
+    implementation ("com.google.android.gms:play-services-mlkit-document-scanner:16.0.0-beta1")
+
 
     // CameraX core library using the camera2 implementation
     val camerax_version = "1.4.0-beta02"
@@ -109,6 +111,8 @@ dependencies {
     // For local unit tests
     testImplementation ("com.google.dagger:hilt-android-testing:2.51.1")
     kaptTest ("com.google.dagger:hilt-compiler:2.51.1")
+
+    implementation("io.coil-kt:coil-compose:2.5.0")
 }
 
 kapt {

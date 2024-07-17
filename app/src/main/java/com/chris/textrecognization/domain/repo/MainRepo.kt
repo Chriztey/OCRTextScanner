@@ -9,4 +9,8 @@ interface MainRepo {
     fun getTextFromCapturedImage(bitmap: Bitmap): Flow<String>
     fun getTextFromSelectedImage(uri: Uri): Flow<String>
     fun copyTextToClipboard(text: String)
+
+    // --
+
+//    fun ocrScanner(): Flow<List<Uri>>
 }

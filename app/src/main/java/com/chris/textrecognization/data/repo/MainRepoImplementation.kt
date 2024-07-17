@@ -68,4 +68,8 @@ class MainRepoImplementation @Inject constructor (
 //            ).show()
 //        }
     }
+
+//    override fun ocrScanner(): Flow<List<Uri>> {
+//        TODO("Not yet implemented")
+//    }
 }
