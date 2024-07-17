@@ -1,6 +1,7 @@
 package com.chris.textrecognization.viewmodel
 
 import android.graphics.Bitmap
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.chris.textrecognization.domain.repo.MainRepo
@@ -23,6 +24,20 @@ class TextRecognitionViewModel @Inject constructor(
             mainRepo.getTextFromCapturedImage(bitmap)
                 .collect {
                     _extractedText.value = it }
+        }
+    }
+
+    fun getTextFromSelectedImage(uri: Uri) {
+        viewModelScope.launch {
+            mainRepo.getTextFromSelectedImage(uri)
+                .collect {
+                    _extractedText.value = it }
+        }
+    }
+
+    fun copyTextToClipboard() {
+        viewModelScope.launch {
+            mainRepo.copyTextToClipboard(_extractedText.value)
         }
     }
 

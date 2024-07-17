@@ -1,8 +1,10 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    kotlin("kapt")
-    id("com.google.dagger.hilt.android")
+    id("kotlin-kapt")
+//    id("dagger.hilt.android.plugin")
+
+    id ("com.google.dagger.hilt.android")
 }
 
 android {
@@ -95,11 +97,18 @@ dependencies {
 
     implementation(libs.accompanist.permissions)
 
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
-    kapt("androidx.hilt:hilt-compiler:1.2.0")
+
+    implementation ("com.google.dagger:hilt-android:2.51.1")
+    kapt ("com.google.dagger:hilt-compiler:2.51.1")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
+    // For instrumentation tests
+    androidTestImplementation  ("com.google.dagger:hilt-android-testing:2.51.1")
+    kaptAndroidTest ("com.google.dagger:hilt-compiler:2.51.1")
+
+    // For local unit tests
+    testImplementation ("com.google.dagger:hilt-android-testing:2.51.1")
+    kaptTest ("com.google.dagger:hilt-compiler:2.51.1")
 }
 
 kapt {

@@ -5,6 +5,8 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
+import android.widget.Toast
 import com.chris.textrecognization.domain.repo.MainRepo
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognizer
@@ -59,5 +61,11 @@ class MainRepoImplementation @Inject constructor (
         clipboardManager.setPrimaryClip(
             ClipData.newPlainText("", text)
         )
+
+//        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
+//            Toast.makeText(
+//                context,"Copied", Toast.LENGTH_SHORT
+//            ).show()
+//        }
     }
 }
