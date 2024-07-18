@@ -2,9 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
-//    id("dagger.hilt.android.plugin")
-
     id ("com.google.dagger.hilt.android")
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -113,6 +112,11 @@ dependencies {
     kaptTest ("com.google.dagger:hilt-compiler:2.51.1")
 
     implementation("io.coil-kt:coil-compose:2.5.0")
+
+    implementation(libs.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
+
+    
 }
 
 kapt {
