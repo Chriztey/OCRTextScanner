@@ -4,6 +4,9 @@ import android.app.Application
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Context.CLIPBOARD_SERVICE
+import android.util.Log
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.chris.textrecognization.data.repo.MainRepoImplementation
 import com.chris.textrecognization.domain.repo.MainRepo
 import com.chris.textrecognization.viewmodel.TextRecognitionViewModel
@@ -14,6 +17,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import java.io.File
+import java.io.FileOutputStream
 import javax.inject.Singleton
 
 @Module
@@ -53,5 +58,6 @@ object AppModule {
             clipboardManager = clipboardManager
         )
     }
+
 
 }

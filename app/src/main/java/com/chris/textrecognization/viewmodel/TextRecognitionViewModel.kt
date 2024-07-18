@@ -2,6 +2,9 @@ package com.chris.textrecognization.viewmodel
 
 import android.graphics.Bitmap
 import android.net.Uri
+import android.util.Log
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.chris.textrecognization.domain.repo.MainRepo
@@ -62,5 +65,8 @@ class TextRecognitionViewModel @Inject constructor(
             mainRepo.copyTextToClipboard(_extractedText.value)
         }
     }
+
+
+
 
 }

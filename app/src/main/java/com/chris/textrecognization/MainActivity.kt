@@ -12,10 +12,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
-import com.chris.textrecognization.screen.MainScreen
+import androidx.navigation.compose.NavHost
+import com.chris.textrecognization.navigation.AppNavHost
 import com.chris.textrecognization.screen.OCRScreen
 import com.chris.textrecognization.ui.theme.TextRecognizationTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,42 +31,47 @@ class MainActivity : ComponentActivity() {
         setContent {
             TextRecognizationTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+
+                    AppNavHost(
+                        activity = this@MainActivity,
+                        modifier = Modifier.padding(innerPadding))
+
 //                    MainScreen(
 //                        modifier = Modifier.padding(innerPadding)
 //                    )
 
 
-                    OCRScreen(
-                        modifier = Modifier.padding(innerPadding),
-                        activity = this@MainActivity,
-                        exportPdf = {
-
-                            val fileName = "scan.pdf"
-                            val externalStorageVolumes: Array<out File> = ContextCompat.getExternalFilesDirs(applicationContext, null)
-                            val primaryExternalStorage = externalStorageVolumes[0]
-                            val file = File(primaryExternalStorage, fileName)
-                            val fos = FileOutputStream(file)
-                            contentResolver.openInputStream(it.uri)?.use { it2 ->
-                                it2.copyTo(fos)
-                            }
-                            Log.d("FileSavePath", "File saved to: ${file.absolutePath}")
-                            Toast.makeText(applicationContext, "Test", Toast.LENGTH_SHORT).show()
-
-                        },
-
-                        exportJpg = {
-                            val fileName = "scan.jpg"
-                            val externalStorageVolumes: Array<out File> = ContextCompat.getExternalFilesDirs(applicationContext, null)
-                            val primaryExternalStorage = externalStorageVolumes[0]
-                            val file = File(primaryExternalStorage, fileName)
-                            val fos = FileOutputStream(file)
-                            contentResolver.openInputStream(it)?.use { it2 ->
-                                it2.copyTo(fos)
-                            }
-                            Log.d("FileSavePath", "File saved to: ${file.absolutePath}")
-                            Toast.makeText(applicationContext, "Test", Toast.LENGTH_SHORT).show()
-                        }
-                    )
+//                    OCRScreen(
+//                        modifier = Modifier.padding(innerPadding),
+//                        activity = this@MainActivity,
+//                        exportPdf = {
+//
+//                            val fileName = "scan.pdf"
+//                            val externalStorageVolumes: Array<out File> = ContextCompat.getExternalFilesDirs(applicationContext, null)
+//                            val primaryExternalStorage = externalStorageVolumes[0]
+//                            val file = File(primaryExternalStorage, fileName)
+//                            val fos = FileOutputStream(file)
+//                            contentResolver.openInputStream(it.uri)?.use { it2 ->
+//                                it2.copyTo(fos)
+//                            }
+//                            Log.d("FileSavePath", "File saved to: ${file.absolutePath}")
+//                            Toast.makeText(applicationContext, "File saved to: ${file.absolutePath}", Toast.LENGTH_SHORT).show()
+//
+//                        },
+//
+//                        exportJpg = {
+//                            val fileName = "scan.jpg"
+//                            val externalStorageVolumes: Array<out File> = ContextCompat.getExternalFilesDirs(applicationContext, null)
+//                            val primaryExternalStorage = externalStorageVolumes[0]
+//                            val file = File(primaryExternalStorage, fileName)
+//                            val fos = FileOutputStream(file)
+//                            contentResolver.openInputStream(it)?.use { it2 ->
+//                                it2.copyTo(fos)
+//                            }
+//                            Log.d("FileSavePath", "File saved to: ${file.absolutePath}")
+//                            Toast.makeText(applicationContext, "File saved to: ${file.absolutePath}", Toast.LENGTH_SHORT).show()
+//                        }
+//                    )
 
                 }
             }
