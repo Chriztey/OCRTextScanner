@@ -50,11 +50,11 @@ fun AppNavHost(
                 exportPdf = { Export.exportFile(
                     context = context,
                     uri = it.uri,
-                    extention = "pdf") },
+                    extension = "pdf") },
                 exportJpg = { Export.exportFile(
                     context = context,
                     uri = it,
-                    extention = "jpg") }
+                    extension = "jpg") }
             )
         }
     }

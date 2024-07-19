@@ -35,62 +35,9 @@ class MainActivity : ComponentActivity() {
                     AppNavHost(
                         activity = this@MainActivity,
                         modifier = Modifier.padding(innerPadding))
-
-//                    MainScreen(
-//                        modifier = Modifier.padding(innerPadding)
-//                    )
-
-
-//                    OCRScreen(
-//                        modifier = Modifier.padding(innerPadding),
-//                        activity = this@MainActivity,
-//                        exportPdf = {
-//
-//                            val fileName = "scan.pdf"
-//                            val externalStorageVolumes: Array<out File> = ContextCompat.getExternalFilesDirs(applicationContext, null)
-//                            val primaryExternalStorage = externalStorageVolumes[0]
-//                            val file = File(primaryExternalStorage, fileName)
-//                            val fos = FileOutputStream(file)
-//                            contentResolver.openInputStream(it.uri)?.use { it2 ->
-//                                it2.copyTo(fos)
-//                            }
-//                            Log.d("FileSavePath", "File saved to: ${file.absolutePath}")
-//                            Toast.makeText(applicationContext, "File saved to: ${file.absolutePath}", Toast.LENGTH_SHORT).show()
-//
-//                        },
-//
-//                        exportJpg = {
-//                            val fileName = "scan.jpg"
-//                            val externalStorageVolumes: Array<out File> = ContextCompat.getExternalFilesDirs(applicationContext, null)
-//                            val primaryExternalStorage = externalStorageVolumes[0]
-//                            val file = File(primaryExternalStorage, fileName)
-//                            val fos = FileOutputStream(file)
-//                            contentResolver.openInputStream(it)?.use { it2 ->
-//                                it2.copyTo(fos)
-//                            }
-//                            Log.d("FileSavePath", "File saved to: ${file.absolutePath}")
-//                            Toast.makeText(applicationContext, "File saved to: ${file.absolutePath}", Toast.LENGTH_SHORT).show()
-//                        }
-//                    )
-
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    TextRecognizationTheme {
-        Greeting("Android")
-    }
-}

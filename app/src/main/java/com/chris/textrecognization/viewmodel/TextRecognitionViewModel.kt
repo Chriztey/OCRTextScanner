@@ -25,14 +25,20 @@ class TextRecognitionViewModel @Inject constructor(
     private val mainRepo: MainRepo
 ): ViewModel() {
 
-    private var _extractedText = MutableStateFlow("")
+    private val _extractedText = MutableStateFlow("")
     val extractedText: StateFlow<String> = _extractedText.asStateFlow()
 
-    private var _ocrScanResult = MutableStateFlow<GmsDocumentScanningResult.Pdf?>(null)
+    private val _ocrScanResult = MutableStateFlow<GmsDocumentScanningResult.Pdf?>(null)
     val ocrScanResult: StateFlow<GmsDocumentScanningResult.Pdf?> = _ocrScanResult.asStateFlow()
 
-    private var _jpgScanResult = MutableStateFlow<List<Uri>>(emptyList())
+    private val _jpgScanResult = MutableStateFlow<List<Uri>>(emptyList())
     val jpgScanResult: StateFlow<List<Uri>> = _jpgScanResult.asStateFlow()
+
+    private val _capturedImage = MutableStateFlow<Bitmap?>(null)
+    val capturedImage: StateFlow<Bitmap?> = _capturedImage.asStateFlow()
+
+    private val _galleryImage = MutableStateFlow<Uri?>(null)
+    val galleryImage: StateFlow<Uri?> = _galleryImage.asStateFlow()
 
     fun updateOcrScan(pdf: Pdf) {
         _ocrScanResult.value = pdf
@@ -40,6 +46,14 @@ class TextRecognitionViewModel @Inject constructor(
 
     fun updatejpgScan(jpg: Uri) {
         _jpgScanResult.value += jpg
+    }
+
+    fun updateCapturedImage(bitmap: Bitmap?) {
+        _capturedImage.value = bitmap
+    }
+
+    fun updateGalleryImage(uri: Uri?) {
+        _galleryImage.value = uri
     }
 
 

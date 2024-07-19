@@ -61,12 +61,11 @@ class MainRepoImplementation @Inject constructor (
         clipboardManager.setPrimaryClip(
             ClipData.newPlainText("", text)
         )
-
-//        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
-//            Toast.makeText(
-//                context,"Copied", Toast.LENGTH_SHORT
-//            ).show()
-//        }
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
+            Toast.makeText(
+                context,"Copied", Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
 }
