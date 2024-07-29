@@ -17,7 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.compose.NavHost
 import com.chris.textrecognization.navigation.AppNavHost
 import com.chris.textrecognization.screen.OCRScreen
-import com.chris.textrecognization.ui.theme.TextRecognizationTheme
+import com.example.compose.TextRecognizationTheme
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.io.FileOutputStream
@@ -30,12 +30,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TextRecognizationTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+
 
                     AppNavHost(
-                        activity = this@MainActivity,
-                        modifier = Modifier.padding(innerPadding))
-                }
+                        activity = this@MainActivity)
+
             }
         }
     }

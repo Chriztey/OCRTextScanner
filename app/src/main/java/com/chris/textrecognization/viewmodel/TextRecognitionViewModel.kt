@@ -40,6 +40,14 @@ class TextRecognitionViewModel @Inject constructor(
     private val _galleryImage = MutableStateFlow<Uri?>(null)
     val galleryImage: StateFlow<Uri?> = _galleryImage.asStateFlow()
 
+    private val _screenState = MutableStateFlow<MainScreenState>(MainScreenState.Success)
+    val screenState: StateFlow<MainScreenState> = _screenState.asStateFlow()
+
+    fun updateScreenState(screenState: MainScreenState) {
+        _screenState.value = screenState
+    }
+
+
     fun updateOcrScan(pdf: Pdf) {
         _ocrScanResult.value = pdf
     }
@@ -60,9 +68,15 @@ class TextRecognitionViewModel @Inject constructor(
 
     fun getTextFromCapturedImage(bitmap: Bitmap) {
         viewModelScope.launch {
+
             mainRepo.getTextFromCapturedImage(bitmap)
                 .collect {
-                    _extractedText.value = it }
+                    if (it.isNotBlank()) {
+                        _extractedText.value = it
+                    } else {
+                        _extractedText.value = "no text found on the image"
+                    }
+                }
         }
     }
 
@@ -70,7 +84,11 @@ class TextRecognitionViewModel @Inject constructor(
         viewModelScope.launch {
             mainRepo.getTextFromSelectedImage(uri)
                 .collect {
-                    _extractedText.value = it }
+                    if (it.isNotBlank()) {
+                        _extractedText.value = it
+                    } else {
+                        _extractedText.value = "no text found on the image"
+                    } }
         }
     }
 
@@ -83,4 +101,10 @@ class TextRecognitionViewModel @Inject constructor(
 
 
 
+}
+
+sealed class MainScreenState {
+    object Success: MainScreenState()
+    object Error: MainScreenState()
+    object Loading : MainScreenState()
 }

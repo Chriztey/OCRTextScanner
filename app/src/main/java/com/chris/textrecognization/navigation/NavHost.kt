@@ -1,6 +1,9 @@
 package com.chris.textrecognization.navigation
 
 import android.app.Activity
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -16,48 +19,60 @@ import kotlinx.serialization.Serializable
 @Composable
 fun AppNavHost(
     activity: Activity,
-    modifier: Modifier
 ) {
-
     val navController = rememberNavController()
-    NavHost(
-        modifier = modifier,
-        navController = navController,
-        startDestination = MainScreen) {
 
-        composable<MainScreen> {
-            MainScreen(
-                navigateToOCR = {
-                    navController.navigate(OCRScreen)
-                },
-                recognizeText = {
-                    navController.navigate(TextRecognizeScreen)
-                }
-            )
+        NavHost(
+
+            navController = navController,
+            startDestination = MainScreen
+        ) {
+
+            composable<MainScreen> {
+                MainScreen(
+                    navigateToOCR = {
+                        navController.navigate(OCRScreen)
+                    },
+                    recognizeText = {
+                        navController.navigate(TextRecognizeScreen)
+                    }
+                )
+            }
+
+            composable<TextRecognizeScreen> {
+                RecognizeTextScreen(
+                    modifier = Modifier,
+                    onNavigateBack = {
+                        navController.navigate(MainScreen)
+                    }
+                    )
+            }
+
+            composable<OCRScreen> {
+
+                val context = LocalContext.current
+
+                OCRScreen(
+                    modifier = Modifier,
+                    activity = activity,
+                    exportPdf = {
+                        Export.exportFile(
+                            context = context,
+                            uri = it.uri,
+                            extension = "pdf"
+                        )
+                    },
+                    exportJpg = {
+                        Export.exportFile(
+                            context = context,
+                            uri = it,
+                            extension = "jpg"
+                        )
+                    }
+                )
+            }
         }
 
-        composable<TextRecognizeScreen> {
-            RecognizeTextScreen(modifier = Modifier)
-        }
-
-        composable<OCRScreen> {
-
-            val context = LocalContext.current
-
-            OCRScreen(
-                modifier = Modifier,
-                activity = activity,
-                exportPdf = { Export.exportFile(
-                    context = context,
-                    uri = it.uri,
-                    extension = "pdf") },
-                exportJpg = { Export.exportFile(
-                    context = context,
-                    uri = it,
-                    extension = "jpg") }
-            )
-        }
-    }
 }
 
 @Serializable
