@@ -22,8 +22,7 @@ fun AppNavHost(
 ) {
     val navController = rememberNavController()
 
-        NavHost(
-
+    NavHost(
             navController = navController,
             startDestination = MainScreen
         ) {
@@ -68,6 +67,9 @@ fun AppNavHost(
                             uri = it,
                             extension = "jpg"
                         )
+                    },
+                    onNavigateBack = {
+                        navController.navigate(MainScreen)
                     }
                 )
             }

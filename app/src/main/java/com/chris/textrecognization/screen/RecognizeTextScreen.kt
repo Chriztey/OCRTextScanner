@@ -79,10 +79,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.chris.textrecognization.R
+import com.chris.textrecognization.component.AppBottomBar
+import com.chris.textrecognization.component.AppTopBar
 import com.chris.textrecognization.viewmodel.MainScreenState
 import com.chris.textrecognization.viewmodel.TextRecognitionViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RecognizeTextScreen(
     modifier: Modifier = Modifier,
@@ -103,7 +104,6 @@ fun RecognizeTextScreen(
     val text by viewModel.extractedText.collectAsState()
     val capturedImage by viewModel.capturedImage.collectAsState()
     val galleryImage by viewModel.galleryImage.collectAsState()
-    val screenState by viewModel.screenState.collectAsState()
 
 
     var hasCameraPermission by remember { mutableStateOf(false) }
@@ -126,11 +126,9 @@ fun RecognizeTextScreen(
         contract = ActivityResultContracts.TakePicturePreview()
     ) { bitmap ->
         bitmap?.let {
-            //viewModel.updateScreenState(MainScreenState.Loading)
             viewModel.updateCapturedImage(it)
             viewModel.getTextFromCapturedImage(it)
             viewModel.updateGalleryImage(null)
-            //viewModel.updateScreenState(MainScreenState.Success)
         }
     }
 
@@ -138,11 +136,9 @@ fun RecognizeTextScreen(
         contract = ActivityResultContracts.GetContent(),
         onResult = {
             if (it != null) {
-                //viewModel.updateScreenState(MainScreenState.Loading)
                 viewModel.updateGalleryImage(it)
                 viewModel.getTextFromSelectedImage(it)
                 viewModel.updateCapturedImage(null)
-                //viewModel.updateScreenState(MainScreenState.Success)
             }
         }
     )
@@ -173,12 +169,7 @@ fun RecognizeTextScreen(
             modifier = Modifier
                 .fillMaxSize(),
             contentAlignment = Alignment.Center,
-//            horizontalAlignment = Alignment.CenterHorizontally,
-//            verticalArrangement = Arrangement.Center
         ) {
-
-
-
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(12.dp))
@@ -200,65 +191,20 @@ fun RecognizeTextScreen(
                     },
                 contentScale = ContentScale.FillBounds,
                 painter = painterResource(id = R.drawable.button_startconvert),
-                contentDescription = "ocr")
-
-//            if (openConvertDialog) {
-//                ConvertDialogBox (
-//                    onDismiss = { openConvertDialog = false },
-//                    cameraLauncher = { if(hasCameraPermission) {
-//                        cameraLauncher.launch()}
-//                    else {cameraPermissionLauncher
-//                        .launch(Manifest.permission.CAMERA)}
-//                    },
-//                    galleryLauncher = {
-//                        galleryLauncher.launch(
-//                            "image/*")
-//                    }
-//                )
-//            }
-
+                contentDescription = "text recognize")
         }
+
     } else {
 
         Scaffold(
             topBar = {
-                TopAppBar(
-                    title = { 
-                        Text(
-                            text = "ImageToText", 
-                            style = MaterialTheme.typography.titleLarge)},
-                    navigationIcon = {
-                        IconButton(onClick = { onNavigateBack() }) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.baseline_arrow_back_ios_24),
-                                contentDescription = "back")
-                        }
-                    }
-                    )
+                AppTopBar(title = "ImageToText") {
+                    onNavigateBack()
+                }
             },
             bottomBar = {
-                BottomAppBar {
-
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.End
-                    ) {
-                        Button(
-                            onClick = { openConvertDialog = true },
-                            shape = RoundedCornerShape(16.dp),
-                            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.secondaryContainer)
-                        ) {
-                            Icon(
-                                modifier = Modifier.padding(end = 8.dp),
-                                painter = painterResource(id = R.drawable.baseline_camera_24),
-                                contentDescription = ""
-                            )
-                            Text(text = "Change Image")
-                        }
-                    }
-
-
-
+                AppBottomBar(label = "Change Image") {
+                    openConvertDialog = true
                 }
             }
         ) {
@@ -274,15 +220,11 @@ fun RecognizeTextScreen(
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxWidth()
-                        //.fillMaxHeight(0.7f)
                 ) {
                     item {
                         Box(
                             modifier = Modifier
                                 .height(426.dp)
-//                                .padding(
-//                                    horizontal = 16.dp,
-//                                    vertical = 32.dp)
                         ) {
                             Card(
                                 modifier = Modifier
@@ -389,41 +331,6 @@ fun RecognizeTextScreen(
 
 
                 }
-                //        }
-
-
-                //                capturedImage?.let { bitmap ->
-                //                    Image(
-                //                        bitmap = bitmap.asImageBitmap(),
-                //                        contentDescription = null,
-                //                        modifier = Modifier.size(200.dp)
-                //                    )
-                //                }
-
-
-//                Row(
-//                    modifier = Modifier.fillMaxWidth(),
-//                    horizontalArrangement = Arrangement.SpaceAround
-//                ) {
-//                    Button(onClick = {
-//                        if (hasCameraPermission) {
-//                            cameraLauncher.launch()
-//                        } else {
-//                            cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
-//                        }
-//                    }) {
-//                        Text(text = "Start Camera")
-//                    }
-//
-//                    Button(onClick = {
-//                        galleryLauncher.launch(
-//                            "image/*"
-//                        )
-//                    }) {
-//                        Text(text = "Choose From Gallery")
-//                    }
-//
-//                }
 
             }
         }

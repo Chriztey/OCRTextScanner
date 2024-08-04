@@ -44,8 +44,6 @@ fun MainScreen(
     recognizeText: () -> Unit = {}
 ) {
 
-
-    
     Surface(
         modifier = Modifier.fillMaxSize(),
         onClick = { /*TODO*/ }) {
@@ -54,8 +52,6 @@ fun MainScreen(
             2
         })
 
-
-        
         Box(
             modifier = Modifier
                 .fillMaxSize()) {
@@ -72,7 +68,6 @@ fun MainScreen(
                     .fillMaxSize()
                     .verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.Top,
-                //horizontalAlignment = Alignment.CenterHorizontally
 
             ) {
                 Text(
@@ -155,25 +150,6 @@ fun MainScreen(
             }
         }
     }
-    
-    
-    
-    
-    
-//    Column(
-//        modifier = Modifier.fillMaxSize(),
-//        verticalArrangement = Arrangement.Center,
-//        horizontalAlignment = Alignment.CenterHorizontally
-//    ) {
-//        Button(onClick = { navigateToOCR() }) {
-//            Text(text = "OCR")
-//        }
-//
-//        Spacer(modifier = Modifier.height(30.dp))
-//
-//        Button(onClick = { recognizeText() }) {
-//            Text(text = "Recognize")
-//        }
-//    }
+
 }
 

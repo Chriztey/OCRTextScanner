@@ -30,11 +30,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TextRecognizationTheme {
-
-
                     AppNavHost(
                         activity = this@MainActivity)
-
             }
         }
     }
