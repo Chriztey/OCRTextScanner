@@ -117,6 +117,8 @@ dependencies {
     implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
 
+    implementation ("androidx.core:core-splashscreen:1.0.1")
+
     
 }
 
