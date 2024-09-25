@@ -26,3 +26,6 @@ The app is built with Android Studio using Kotlin and leverages Google's ML Kit 
 
 <h5>Download APK Here</h5>
 https://drive.google.com/drive/folders/1pfnqnKfHOyirLoLsicOj4u4bOOLFCCBz?usp=sharing
+
+<h5>Demo Video</h5>
+https://youtu.be/_fCSviIxvuk?si=zICwzC-d6a7YrLxs
